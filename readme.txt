@@ -1,4 +1,4 @@
-# Milyutin Code Article Reposter for VK
+#Milyutin Code Article Reposter for VK
 
 [![WordPress](https://img.shields.io/badge/WordPress-5.0%2B-21759B?logo=wordpress&logoColor=white)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-7.2%2B-777BB4?logo=php&logoColor=white)](https://www.php.net/)
@@ -50,3 +50,8 @@ milyutin-code-article-reposter-for-vk/
 ├── index.php
 ├── milyutin-code-article-reposter-for-vk.php
 └── readme.txt
+❓ FAQ
+Question	Answer
+Do I have to pay for Yandex GPT?	Yes, Yandex GPT is a paid service, but they offer a free trial grant. If you prefer not to pay, select the "First paragraph" mode.
+Can I publish to multiple groups?	Not yet, but this feature is planned for a future release.
+Why are images not attached to posts?	Since September 2026, VKontakte restricted photo uploads for community access keys. The plugin currently publishes text with a link.
