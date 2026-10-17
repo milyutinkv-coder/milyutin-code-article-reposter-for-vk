@@ -1,60 +1,52 @@
-# Milyutin Instant Indexer
+# Milyutin Code Article Reposter for VK
 
-[![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-21759B?logo=wordpress&logoColor=white)](https://wordpress.org/)
-[![PHP](https://img.shields.io/badge/PHP-7.4%2B-777BB4?logo=php&logoColor=white)](https://www.php.net/)
+[![WordPress](https://img.shields.io/badge/WordPress-5.0%2B-21759B?logo=wordpress&logoColor=white)](https://wordpress.org/)
+[![PHP](https://img.shields.io/badge/PHP-7.2%2B-777BB4?logo=php&logoColor=white)](https://www.php.net/)
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/gpl-2.0)
+[![WordPress.org](https://img.shields.io/badge/WordPress.org-Published-green)](https://wordpress.org/plugins/milyutin-code-article-reposter-for-vk/)
 
-> WordPress plugin for instantly submitting new and updated posts for indexing to **IndexNow** (Yandex, Bing, Naver, Seznam) and **Google Indexing API** (via your own Google Cloud service account). No third-party subscriptions required.
+> WordPress plugin that automatically publishes articles to a **VKontakte** group with AI-generated summaries via **Yandex GPT** or the first paragraph.
 
 **Author:** Konstantin Milyutin · [milyutin-codes.ru](https://milyutin-codes.ru) · [VK Group](https://vk.com/milyutin_codes)
 
----
+## ✨ Features
+
+- 🚀 **Automatic publishing** — triggers when you publish a post.
+- 🧠 **AI-generated summaries** — integrate with Yandex GPT to create engaging previews.
+- 📝 **Fallback mode** — use the first paragraph (excerpt) if you don't want to pay for AI.
+- 🔄 **Auto-update** — when you update a post, the plugin updates the VK wall post automatically.
+- 🖱️ **Manual publishing** — "Publish now" button in the post editor.
+- 📊 **Smart logging** — all actions are logged and viewable in the admin area.
+- 🌍 **Fully translatable** — ready for localization.
 
 ## 📋 Requirements
 
-- WordPress 5.8 or higher
-- PHP 7.4 or higher
-- Pretty permalinks enabled (or write access to the site root for a physical key file)
-- OpenSSL extension (required for encrypting the Google JSON key)
+- WordPress 5.0 or higher
+- PHP 7.2 or higher
+- VKontakte Community Access Key
+- Yandex Cloud API Key (optional, for AI summaries)
 
 ## 🚀 Installation
 
-1. Upload the `milyutin-instant-indexer` folder to `wp-content/plugins/` (or upload a ZIP file via **Plugins → Add New → Upload Plugin**).
-2. Activate the plugin. Upon activation, it automatically generates an IndexNow key, registers rewrite rules, and schedules WP-Cron tasks.
-3. Go to the **Instant Indexer** menu and follow the on-screen instructions (the "Setup Instructions" section covers both IndexNow and Google).
+1. Upload the plugin folder to `wp-content/plugins/` or install via the WordPress plugin repository.
+2. Activate the plugin.
+3. Go to **Reposter-For-VK** in the admin menu.
+4. Fill in your **VK Group ID** and **Community Access Key**.
+5. Choose your summary source (Yandex GPT or First Paragraph).
 
 ## 📂 File Structure
 
 ```text
-milyutin-instant-indexer/
-├── milyutin-instant-indexer.php   # Entry point, auto-submit hooks, WP-Cron
-├── uninstall.php                  # Complete data cleanup upon uninstall
+milyutin-code-article-reposter-for-vk/
+├── assets/
+│   ├── admin.css
+│   └── admin.js
 ├── includes/
-│   ├── class-mii-settings.php     # Settings page, Settings API, sanitization
-│   ├── class-mii-ajax.php         # AJAX handlers (nonce + capability checks)
-│   ├── class-mii-indexnow.php     # IndexNow module + virtual key file
-│   ├── class-mii-google.php       # Google Indexing API, JWT, daily quota, queue
-│   ├── class-mii-logger.php       # File logging + recent 20 entries table
-│   └── class-mii-crypto.php       # Google JSON service account encryption
-└── assets/
-    ├── css/admin.css              # Admin settings page styles
-    └── js/admin.js                # AJAX, progress bar, check buttons
-🔒 Security
-Settings API: All forms use settings_fields() (nonce) and options.php (capability checks).
-
-AJAX Security: All AJAX requests are protected by check_ajax_referer() and current_user_can( 'manage_options' ).
-
-Data Encryption: The Google service account JSON is stored in a separate option (autoload = false) encrypted via AES-256-CBC + HMAC-SHA256. Keys are derived from WordPress salts and are never exposed in the UI.
-
-Safe Logging: Logs never contain secrets. Private keys, JWTs, and access tokens are automatically masked.
-
-File Protection: Log files are protected by .htaccess and index.php. The physical key file is restricted to /{key}.txt.
-
-❓ Troubleshooting
-Symptom	Cause & Solution
-IndexNow 403/404	Key file is inaccessible. Enable pretty permalinks, clear cache, or create a physical key file.
-IndexNow 422	URL doesn't belong to your site's domain. Check "Settings → General" and www prefix.
-IndexNow 202	Key is still being verified. The plugin will automatically retry the request.
-Google 403	Service account email isn't added as an Owner in Search Console, or Web Search Indexing API isn't enabled.
-Google 429	Daily quota (200) exceeded. URLs will be queued and processed automatically later.
-"Failed to decrypt JSON"	WordPress salts changed in wp-config.php. Please re-upload the JSON key.
+│   ├── class-vkaire-logger.php
+│   ├── class-vkaire-main.php
+│   ├── class-vkaire-settings.php
+│   ├── class-vkaire-vk-poster.php
+│   └── class-vkaire-yandex-gpt.php
+├── index.php
+├── milyutin-code-article-reposter-for-vk.php
+└── readme.txt
