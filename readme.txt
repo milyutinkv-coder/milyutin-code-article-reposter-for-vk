@@ -50,7 +50,7 @@ milyutin-code-article-reposter-for-vk/
 ├── index.php
 ├── milyutin-code-article-reposter-for-vk.php
 └── readme.txt
-
+```
 ❓ FAQ
 Question	Answer
 Do I have to pay for Yandex GPT?	Yes, Yandex GPT is a paid service, but they offer a free trial grant. If you prefer not to pay, select the "First paragraph" mode.
